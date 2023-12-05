@@ -5,7 +5,7 @@ public static class EnumerableExtensions
     public static char[][] AsCharArray(this IEnumerable<string> lines) =>
         lines.Select(l => l.ToCharArray()).ToArray();
 
-    public static IEnumerable<(T,T)> Cartesian<T>(this IEnumerable<T> first, IEnumerable<T> second) => 
+    public static IEnumerable<(T1,T2)> Cartesian<T1,T2>(this IEnumerable<T1> first, IEnumerable<T2> second) => 
         first.SelectMany(_ => second, (l, r) => (l, r));
 
     public static IEnumerable<(int,int)> CartesianCoords(int firstDimensionSize, int secondDimensionSize) => 
