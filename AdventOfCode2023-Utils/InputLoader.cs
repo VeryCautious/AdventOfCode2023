@@ -9,5 +9,5 @@ public static class InputLoader
 
     public static string LoadText(string fileName = "PuzzleInput.txt") => File.ReadAllText(fileName);
 
-    public static IImmutableList<string> AsLines(this string text) => text.Split('\n').ToImmutableList();
+    
 }
