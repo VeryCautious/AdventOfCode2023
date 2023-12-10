@@ -13,7 +13,13 @@ public static class EnumerableExtensions
 
     public static IEnumerable<(T,T)> CartesianSelf<T>(this IEnumerable<T> first)
     {
-        var enumerated = first.ToArray();
+        var enumerated = first as T[] ?? first.ToArray();
         return Cartesian(enumerated, enumerated);
+    }
+
+    public static IEnumerable<(T, int)> ZipWithIndex<T>(this IEnumerable<T> items)
+    {
+        var array = items as T[] ?? items.ToArray();
+        return array.Zip(Enumerable.Range(0, array.Length));
     }
 }

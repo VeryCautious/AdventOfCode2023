@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Linq;
 
 namespace AdventOfCode2023_Utils;
 
@@ -10,7 +9,6 @@ public static class StringExtensions
         .Select(s => s.Replace("\r", ""))
         .ToImmutableList();
 
-
     public static IImmutableList<int> IntegersAsList(this string text, char separator = ' ') => text
         .Split(separator)
         .Select(s => s.Trim())
@@ -18,4 +16,7 @@ public static class StringExtensions
         .Where(s => s.All(c => char.IsDigit(c) || c == '-'))
         .Select(int.Parse)
         .ToImmutableList();
+
+    public static string CollectToString(this IEnumerable<string> strings, string separator = "") =>
+        string.Join(separator, strings);
 }
