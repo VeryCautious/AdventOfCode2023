@@ -22,4 +22,10 @@ public static class EnumerableExtensions
         var array = items as T[] ?? items.ToArray();
         return array.Zip(Enumerable.Range(0, array.Length));
     }
+
+    public static IEnumerable<(T, T)> SlidingWindow<T>(this IEnumerable<T> enumerable)
+    {
+        var array = enumerable as T[] ?? enumerable.ToArray();
+        return array.Zip(array.Skip(1)).ToArray();
+    }
 }
