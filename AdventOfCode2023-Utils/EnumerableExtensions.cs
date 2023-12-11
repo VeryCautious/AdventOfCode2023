@@ -17,7 +17,7 @@ public static class EnumerableExtensions
         return Cartesian(enumerated, enumerated);
     }
 
-    public static IEnumerable<(T, int)> ZipWithIndex<T>(this IEnumerable<T> items)
+    public static IEnumerable<(T Value, int Index)> ZipWithIndex<T>(this IEnumerable<T> items)
     {
         var array = items as T[] ?? items.ToArray();
         return array.Zip(Enumerable.Range(0, array.Length));
