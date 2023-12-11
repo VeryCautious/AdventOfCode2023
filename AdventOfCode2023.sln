@@ -3,25 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day1", "AdventOfCode2023-Day1\AdventOfCode2023-Day1.csproj", "{53F17B16-F76F-4646-8B1E-0B46CCE26D4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day01", "AdventOfCode2023-Day1\AdventOfCode2023-Day01.csproj", "{53F17B16-F76F-4646-8B1E-0B46CCE26D4B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day2", "AdventOfCode2023-Day2\AdventOfCode2023-Day2.csproj", "{6C8E68C1-0179-494A-8AF2-BC5AF43B001C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day02", "AdventOfCode2023-Day2\AdventOfCode2023-Day02.csproj", "{6C8E68C1-0179-494A-8AF2-BC5AF43B001C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Utils", "AdventOfCode2023-Utils\AdventOfCode2023-Utils.csproj", "{3E0823E7-BFCF-4C4D-AAB9-D47F69BCDA25}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day3", "AdventOfCode2023-Day3\AdventOfCode2023-Day3.csproj", "{D249E23A-ABE2-42D7-A071-BC110BCDF84F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day03", "AdventOfCode2023-Day3\AdventOfCode2023-Day03.csproj", "{D249E23A-ABE2-42D7-A071-BC110BCDF84F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day4", "AdventOfCode2023-Day4\AdventOfCode2023-Day4.csproj", "{BA54F7B5-05E6-4043-BF44-6759EE718AA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day04", "AdventOfCode2023-Day4\AdventOfCode2023-Day04.csproj", "{BA54F7B5-05E6-4043-BF44-6759EE718AA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day5", "AdventOfCode2023-Day5\AdventOfCode2023-Day5.csproj", "{ED856CE5-6892-41B4-B333-68C249576E08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day05", "AdventOfCode2023-Day5\AdventOfCode2023-Day05.csproj", "{ED856CE5-6892-41B4-B333-68C249576E08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day6", "AdventOfCode2023-Day6\AdventOfCode2023-Day6.csproj", "{3385BC05-6A1D-4AD1-A8B9-E08DA0CD26C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day06", "AdventOfCode2023-Day6\AdventOfCode2023-Day06.csproj", "{3385BC05-6A1D-4AD1-A8B9-E08DA0CD26C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day7", "AdventOfCode2023-Day7\AdventOfCode2023-Day7.csproj", "{1BD5F2BB-1ADC-4718-9B2F-AD5B80E36E65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day07", "AdventOfCode2023-Day7\AdventOfCode2023-Day07.csproj", "{1BD5F2BB-1ADC-4718-9B2F-AD5B80E36E65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day8", "AdventOfCode2023-Day8\AdventOfCode2023-Day8.csproj", "{3A52846B-CDA7-4081-95A0-2DFC302C63BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode2023-Day08", "AdventOfCode2023-Day8\AdventOfCode2023-Day08.csproj", "{3A52846B-CDA7-4081-95A0-2DFC302C63BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2023-Day9", "AdventOfCode2023-Day9\AdventOfCode2023-Day9.csproj", "{5073B4CD-051B-4AE7-934B-17B0E31D43F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2023-Day09", "AdventOfCode2023-Day9\AdventOfCode2023-Day09.csproj", "{5073B4CD-051B-4AE7-934B-17B0E31D43F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode2023-Day10", "AdventOfCode2023-Day10\AdventOfCode2023-Day10.csproj", "{427A61E3-E398-452F-877B-8BFD8DB8C0D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{5073B4CD-051B-4AE7-934B-17B0E31D43F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5073B4CD-051B-4AE7-934B-17B0E31D43F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5073B4CD-051B-4AE7-934B-17B0E31D43F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{427A61E3-E398-452F-877B-8BFD8DB8C0D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{427A61E3-E398-452F-877B-8BFD8DB8C0D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{427A61E3-E398-452F-877B-8BFD8DB8C0D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{427A61E3-E398-452F-877B-8BFD8DB8C0D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
