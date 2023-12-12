@@ -2,49 +2,37 @@
 
 namespace AdventOfCode2023_Day11;
 
-public sealed record Universe(int Width, int Height, IImmutableList<Point2D> Galaxies)
+public sealed record Universe(IImmutableList<Point2D> Galaxies, IImmutableList<int> EmptyRowsByIndex,  IImmutableList<int> EmptyColumnsByIndex, int ExpansionFactor)
 {
-    public static Universe From(string text)
+    public static Universe From(string text, int expansionFactor)
     {
-        var universeText = DeGravitate(text);
-        var universeLines = universeText.AsLines();
-        var height = universeLines.Count;
-        var width = universeLines[0].Length;
-
-        var galaxies = universeText
+        var galaxies = text
             .CharsBy2dPosition()
             .Where(t => t.Value == '#')
             .Select(t => t.Key)
             .ToImmutableList();
 
-        return new Universe(width, height, galaxies);
+        var lines = text.AsLines();
+        
+        var emptyRowsByIndex = Enumerable.Range(1, lines.Count)
+            .Select(i => lines.Take(i).Count(line => line.All(c => c == '.')))
+            .ToImmutableList();
+
+        var emptyColumnsByIndex = Enumerable.Range(1, lines[0].Length).Select(i =>
+            lines
+                .SelectMany(line => line.ZipWithIndex())
+                .GroupBy(t => t.Index)
+                .Where(t => t.Key < i)
+                .Count(g => g.All(t => t.Value == '.'))
+            ).ToImmutableList();
+
+        return new Universe(galaxies, emptyRowsByIndex, emptyColumnsByIndex, expansionFactor);
     }
 
-    private static string DeGravitate(string text)
+    public long DistanceBetween(Point2D p1, Point2D p2)
     {
-        var lines = text.AsLines();
-
-        var emptySpaceLines = lines
-            .ZipWithIndex()
-            .Where(t => t.Value.All(c => c == '.'))
-            .Select(t => t.Index)
-            .OrderDescending()
-            .ToArray();
-
-        var emptyLine = Enumerable.Repeat('.', lines[0].Length).CollectToString();
-
-        var expandedLines = emptySpaceLines.Aggregate(lines, (ls, index) => ls.Insert(index, emptyLine));
-
-        var emptySpaceColumns = lines
-            .SelectMany(line => line.ZipWithIndex())
-            .GroupBy(t => t.Index)
-            .Where(g => g.All(t => t.Value == '.'))
-            .Select(g => g.Key)
-            .OrderDescending()
-            .ToArray();
-
-        return expandedLines
-            .Select(originalLine => emptySpaceColumns.Aggregate(originalLine, (line, index) => line.Insert(index, ".")))
-            .CollectToString("\n");
+        var emptyRows = EmptyRowsByIndex[Math.Max(p1.Y, p2.Y)] - EmptyRowsByIndex[Math.Min(p1.Y, p2.Y)];
+        var emptyColumns = EmptyColumnsByIndex[Math.Max(p1.X, p2.X)] - EmptyColumnsByIndex[Math.Min(p1.X, p2.X)];
+        return p1.ManhattanDistance(p2) + (emptyRows + emptyColumns) * (long)(ExpansionFactor - 1);
     }
 }
