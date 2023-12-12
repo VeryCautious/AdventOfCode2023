@@ -19,4 +19,12 @@ public static class StringExtensions
 
     public static string CollectToString(this IEnumerable<string> strings, string separator = "") =>
         string.Join(separator, strings);
+
+    public static string CollectToString(this IEnumerable<char> chars) =>
+        new(chars.ToArray());
+
+    public static IImmutableDictionary<Point2D, char> CharsBy2dPosition(this string text) => text
+            .AsLines()
+            .SelectMany((l, y) => l.Select((c, x) => (new Point2D(x, y), c)))
+            .ToImmutableDictionary(t => t.Item1, t => t.c);
 }
