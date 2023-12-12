@@ -28,4 +28,10 @@
     <ProjectReference Include="..\AdventOfCode2023-Utils\AdventOfCode2023-Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="PuzzleInput.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
