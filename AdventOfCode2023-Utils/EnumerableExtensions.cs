@@ -28,4 +28,22 @@ public static class EnumerableExtensions
         var array = enumerable as T[] ?? enumerable.ToArray();
         return array.Zip(array.Skip(1)).ToArray();
     }
+
+    public static IEnumerable<int> IndexesOf<T>(this IEnumerable<T> enumerable, T value)
+    {
+        if (value is null)
+        {
+            throw new ArgumentNullException(nameof(value));
+        }
+
+        return enumerable.ZipWithIndex().Where(t => value!.Equals(t.Value)).Select(t => t.Index).ToArray();
+    }
+
+    public static IEnumerable<IEnumerable<T>> SplitBy<T>(this IEnumerable<T> enumerable, T splitter)
+    {
+        var array = enumerable as T[] ?? enumerable.ToArray();
+        var subIndexes = array.IndexesOf(splitter).Prepend(-1).Append(array.Length).Distinct().SlidingWindow().ToArray();
+        var values = subIndexes.Select(t => array[(t.Item1+1)..t.Item2]).ToArray();
+        return values;
+    }
 }
