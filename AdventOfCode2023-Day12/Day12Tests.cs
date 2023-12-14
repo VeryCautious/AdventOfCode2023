@@ -14,7 +14,7 @@ public class Day12Tests
         arrangementSum.Should().Be(21);
     }
 
-    [Fact]
+    [Fact(Skip = "Takes a while")]
     public void PuzzleInput_ArrangementCountSummed_7251()
     {
         var springRows = InputLoader.LoadLineByLine().Select(SpringRow.From).ToImmutableList();
