@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Diagnostics;
 
 namespace AdventOfCode2023_Day14;
 
@@ -21,40 +20,32 @@ public sealed record PlatForm(IImmutableDictionary<Point2D, char> Positions, int
 
     public PlatForm GetAfterCycle(int amount)
     {
-        var (cycleStart, cycleLength, fixPoint) = FindCycleCycle();
-
-        int remaining;
-        PlatForm startPoint;
+        var (cycleStart, cycleLength, cycleValues) = FindCycleCycle();
 
         if (cycleStart > amount)
         {
-            remaining = amount;
-            startPoint = this;
-        }
-        else
-        {
-            remaining = (amount - cycleStart) % cycleLength;
-            startPoint = fixPoint;
+            return Enumerable.Range(0, amount).Aggregate(this, (platFrom, _) => platFrom.GetAfterCycle());
         }
 
-        return Enumerable.Range(0, remaining).Aggregate(startPoint, (platFrom, _) => platFrom.GetAfterCycle());
+        var remaining = (amount - cycleStart) % cycleLength;
+        return cycleValues[remaining];
     }
 
-    public PlatForm GetTiltedNorth()
+    internal PlatForm GetTiltedNorth()
     {
         var movingStones = Positions
             .Where(t => t.Value == MovingStone)
             .Select(t => t.Key)
             .OrderBy(t => t.Y);
 
-        return this with { Positions = movingStones.Aggregate(Positions, LetFall) };
+        return this with { Positions = movingStones.Aggregate(Positions.ToDictionary(), LetFall).ToImmutableDictionary() };
     }
 
     private PlatForm GetTiltedSouth() => FlippedNorthSouth().GetTiltedNorth().FlippedNorthSouth();
     private PlatForm GetTiltedEast() => TurnRight().GetTiltedNorth().TurnLeft();
     private PlatForm GetTiltedWest() => TurnLeft().GetTiltedNorth().TurnRight();
 
-    public PlatForm TurnLeft()
+    internal PlatForm TurnLeft()
     {
         var newPositions = Positions
             .Select(t => new KeyValuePair<Point2D, char>(new Point2D(Height-1-t.Key.Y, t.Key.X), t.Value))
@@ -63,7 +54,7 @@ public sealed record PlatForm(IImmutableDictionary<Point2D, char> Positions, int
         return new PlatForm(Positions: newPositions, Height: Width, Width: Height);
     }
 
-    public PlatForm TurnRight()
+    internal PlatForm TurnRight()
     {
         var newPositions = Positions
             .Select(t => new KeyValuePair<Point2D, char>(new Point2D(t.Key.Y, Width-1-t.Key.X), t.Value))
@@ -72,7 +63,7 @@ public sealed record PlatForm(IImmutableDictionary<Point2D, char> Positions, int
         return new PlatForm(Positions: newPositions, Height: Width, Width: Height);
     }
 
-    public PlatForm FlippedNorthSouth()
+    internal PlatForm FlippedNorthSouth()
     {
         var newPositions = Positions
             .Select(t => new KeyValuePair<Point2D, char>(t.Key with { Y = Height - 1 - t.Key.Y }, t.Value))
@@ -81,45 +72,34 @@ public sealed record PlatForm(IImmutableDictionary<Point2D, char> Positions, int
         return this with { Positions = newPositions };
     }
 
-    private (int cycleStart, int cycleLength, PlatForm fixPoint) FindCycleCycle()
+    private (int cycleStart, int cycleLength, IImmutableList<PlatForm> cycle) FindCycleCycle()
     {
         var hashSet = new Dictionary<string, int>();
+        var platFroms = new List<PlatForm>();
         var current = this;
-        var sw = new Stopwatch();
-        var times = new List<double>();
 
         while (hashSet.TryAdd(current.ToString(), hashSet.Count))
         {
-            sw.Restart();
             current = current.GetAfterCycle();
-            sw.Stop();
-            times.Add(TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds).TotalSeconds);
-            var average = times.Average(); //4.5sec
-            var x = 1;
+            platFroms.Add(current);
         }
 
         var startCount = hashSet[current.ToString()];
-        return (startCount, hashSet.Count - startCount, current);
+        return (startCount, hashSet.Count - startCount, platFroms.Skip(startCount-1).ToImmutableList());
     }
 
-    private static IImmutableDictionary<Point2D, char> LetFall(IImmutableDictionary<Point2D, char> positions, Point2D p)
+    private static Dictionary<Point2D, char> LetFall(Dictionary<Point2D, char> positions, Point2D p)
     {
-        var remainingRow = positions
-            .Where(t => t.Key.X == p.X && t.Key.Y < p.Y)
-            .OrderBy(t => t.Key.Y)
-            .ToArray();
-
-        var fallingOverPoints = remainingRow
-            .Reverse()
-            .TakeWhile(t => t.Value == EmptySpace)
-            .ToArray();
-
-        if (fallingOverPoints.Length == 0)
+        for (var i = 1; i <= 100; i++)
         {
-            return positions;
+            if (p.Y - i >= 0 && positions[p with { Y = p.Y - i }] == EmptySpace) continue;
+            
+            positions[p] = EmptySpace;
+            positions[p with { Y = p.Y + 1 - i }] = MovingStone;
+            break;
         }
 
-        return positions.SetItems([new(fallingOverPoints[^1].Key, MovingStone), new(p, EmptySpace)]);
+        return positions;
     }
 
     public override string ToString() =>

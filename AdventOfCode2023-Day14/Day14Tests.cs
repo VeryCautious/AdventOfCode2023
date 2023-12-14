@@ -53,7 +53,7 @@ public class Day14Tests
     [Fact]
     public void PuzzleInput_GetAfterMrdCycleCalculateLoad_Example1()
     {
-        PlatForm.From(InputLoader.LoadText()).GetAfterCycle(1000000000).CalculateLoad().Should().Be(1);
+        PlatForm.From(InputLoader.LoadText()).GetAfterCycle(1000000000).CalculateLoad().Should().Be(98029);
     }
 
     private static string Example1 => 
