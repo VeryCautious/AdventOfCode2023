@@ -36,7 +36,10 @@ public static class EnumerableExtensions
             throw new ArgumentNullException(nameof(value));
         }
 
-        return enumerable.ZipWithIndex().Where(t => value!.Equals(t.Value)).Select(t => t.Index).ToArray();
+        return enumerable
+            .ZipWithIndex()
+            .Where(t => value.Equals(t.Value)).Select(t => t.Index)
+            .ToArray();
     }
 
     public static IEnumerable<IEnumerable<T>> SplitBy<T>(this IEnumerable<T> enumerable, T splitter)
