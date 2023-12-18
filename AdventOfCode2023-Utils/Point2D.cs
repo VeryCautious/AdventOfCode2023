@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace AdventOfCode2023_Utils;
+﻿namespace AdventOfCode2023_Utils;
 
 public sealed record Point2D(int X, int Y)
 {
