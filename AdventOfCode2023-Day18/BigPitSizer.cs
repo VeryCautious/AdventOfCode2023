@@ -22,8 +22,8 @@ public static class BigPitSizer
         var cycledCorners = corners.Append(corners.First()).ToImmutableList();
         var edges = cycledCorners.SlidingWindow().ToImmutableList();
 
-        // Pick's theorem ( https://en.wikipedia.org/wiki/Pick%27s_theorem )
-        var boundary = edges.Sum(e => (e.Item1.ManhattanDistance(e.Item2)));
+        // https://en.wikipedia.org/wiki/Pick%27s_theorem
+        var boundary = edges.Sum(e => e.Item1.ManhattanDistance(e.Item2));
         var area = SizeByCorners(cycledCorners);
         var sum = area + boundary / 2 + 1;
         return sum;
